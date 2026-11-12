@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff1f4">
+  <meta name="description" content="A little birthday universe made with love, surprises, sweet moments, and a tiny game.">
+  <title>A Little Birthday Surprise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <audio id="bgMusic" src="assets/audio/background-music.mp3" loop preload="none"></audio>
+  <audio id="finalLetterMusic" loop preload="auto"></audio>
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="Toggle background music" title="Background music"><span class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="music-label">Music off</span></button>
+  <div class="site-progress" id="siteProgress" aria-hidden="true"><span></span></div>
+
+  <main>
+    <!-- 01 / Welcome -->
+    <section class="screen screen-home active" id="homeScreen" aria-labelledby="welcomeTitle">
+      <div class="home-glow home-glow-one"></div><div class="home-glow home-glow-two"></div>
+      <div class="home-topline"><span class="tiny-star">✦</span> A LITTLE SOMETHING FOR YOU <span class="tiny-star">✦</span></div>
+      <div class="home-copy">
+        <p class="eyebrow">made just for your day</p>
+        <h1 id="welcomeTitle">A bouquet<br><em>of little surprises</em></h1>
+        <p class="home-subtitle">Some flowers, a little sweetness, and a whole lot of happy.</p>
+      </div>
+      <button class="bouquet-button" id="bouquetButton" type="button" aria-label="Open your bouquet">
+        <span class="bouquet-halo"></span>
+        <img src="assets/bouquet.png" alt="A pink bouquet with red lilies" class="bouquet-art">
+        <span class="bouquet-sparkle sparkle-a">✦</span><span class="bouquet-sparkle sparkle-b">✧</span><span class="bouquet-sparkle sparkle-c">✦</span>
+      </button>
+      <div class="home-bottom"><span>tap the bouquet to begin</span><span class="down-arrow">↓</span></div>
+    </section>
+
+    <!-- 02 / Egg opening -->
+    <section class="screen screen-egg" id="eggScreen" aria-labelledby="eggTitle" hidden>
+      <div class="section-kicker">A SWEET LITTLE SURPRISE</div>
+      <h2 class="screen-title" id="eggTitle">A little joy, just for you.</h2>
+      <p class="screen-intro">Peel both tabs outward and downward, just like opening the real treat.</p>
+      <div class="egg-stage" id="eggStage">
+        <div class="closed-egg kinder-package" id="closedEgg" aria-label="Kinder Joy-inspired egg package">
+          <img class="kinder-package-art" src="assets/kinder-joy-egg.png" alt="Kinder Joy egg with white upper shell, red lower shell and Kinder Joy logo">
+          <div class="peel-strip peel-strip-left" id="peelStripLeft" aria-hidden="true"></div>
+          <div class="peel-strip peel-strip-right" id="peelStripRight" aria-hidden="true"></div>
+          <button class="pull-tab pull-tab-left" id="pullTabLeft" type="button" aria-label="Peel the left tab outward and downward"><span class="tab-arrow">↙</span><span class="tab-word">PEEL</span></button>
+          <button class="pull-tab pull-tab-right" id="pullTabRight" type="button" aria-label="Peel the right tab outward and downward"><span class="tab-word">PEEL</span><span class="tab-arrow">↘</span></button>
+        </div>
+        <div class="egg-opened" id="eggOpened" aria-hidden="true">
+          <button class="egg-half half-food" id="foodHalf" type="button">
+            <span class="half-rim"></span><span class="half-label">A LITTLE TREAT(open first)</span><span class="half-title">Favorite<br>food</span><span class="half-emoji">♡</span><span class="half-tap">tap to peek</span>
+          </button>
+          <button class="egg-half half-event" id="eventHalf" type="button">
+            <span class="half-rim"></span><span class="half-label">THE BIG SURPRISE</span><span class="half-title">Main event</span><span class="half-subtitle">""</span><span class="half-emoji">✦</span><span class="half-tap">tap when ready</span>
+          </button>
+        </div>
+      </div>
+      <p class="drag-hint" id="dragHint"><span>↙</span> peel each tab outward and down</p>
+      <button class="text-back" id="eggBackHome" type="button">← back to the bouquet</button>
+    </section>
+
+    <!-- 03 / Favorite food detail -->
+    <section class="screen detail-screen" id="foodScreen" aria-labelledby="foodTitle" hidden>
+      <div class="detail-orb orb-pink"></div>
+      <button class="back-button" data-back="egg" type="button">← Back to the Kinder joy</button>
+      <div class="detail-content zoom-content">
+        <span class="section-kicker">A TINY THING ABOUT YOU</span>
+        <h2 class="detail-title" id="foodTitle">Your favorite food</h2>
+        <p class="detail-copy">A little space for one of your happiest food moments.</p>
+        <figure class="featured-photo">
+          <img id="favoriteFoodImage" src="assets/photos/favorite-food.jpg" alt="Favorite food photo">
+          <div class="photo-placeholder" id="favoriteFoodPlaceholder"><span>♡</span><b>Your favorite food photo</b><small>Add favorite-food.jpg to assets/photos</small></div>
+        </figure>
+        <p class="photo-caption" id="favoriteFoodCaption">The kind of treat that makes your day a little sweeter.</p>
+      </div>
+    </section>
+
+    <!-- 04 / Main event question -->
+    <section class="screen detail-screen" id="eventScreen" aria-labelledby="eventTitle" hidden>
+      <div class="detail-orb orb-peach"></div>
+      <button class="back-button" data-back="egg" type="button">← Back To Kinder Joy</button>
+      <div class="detail-content zoom-content event-question-wrap">
+        <span class="section-kicker">ONE LAST LITTLE QUESTION</span>
+        <div class="question-sticker">✧</div>
+        <h2 class="detail-title" id="eventTitle">You want to see<br>the surprise ??</h2>
+        <p class="detail-copy">A tiny yes can unlock a whole lot of birthday magic.</p>
+        <div class="choice-buttons" id="choiceButtons">
+          <button class="pill-button primary-button" id="surpriseYes" type="button">Yes, show me! <span>♡</span></button>
+          <button class="pill-button soft-button" id="surpriseNo" type="button">No, not yet</button>
+        </div>
+        <p class="choice-note" id="choiceNote" aria-live="polite">Choose wisely, birthday star ✨</p>
+      </div>
+    </section>
+
+    <!-- 05 / Birthday celebration -->
+    <section class="screen birthday-screen" id="birthdayScreen" aria-labelledby="birthdayTitle" hidden>
+      <div class="birthday-wash"></div>
+      <div class="balloon-field" id="balloonField" aria-hidden="true"></div>
+      <div class="confetti-layer" id="birthdayConfetti" aria-hidden="true"></div>
+      <div class="birthday-content">
+        <span class="section-kicker">TODAY IS ALL ABOUT YOU</span>
+        <h2 class="birthday-heading" id="birthdayTitle">Happy Birthday, beautiful!</h2>
+        <p class="birthday-subheading" id="birthdaySubheading">Make a wish, birthday star ✨</p>
+        <div class="cake-wrap">
+          <div class="cake-sparkles" aria-hidden="true">✦　·　✧　·　✦</div>
+          <div class="cake" aria-label="A decorated birthday cake with five candles">
+            <div class="cake-top"></div>
+            <div class="cake-top-cream"></div>
+            <div class="cake-candles" id="cakeCandles">
+              <button class="candle" type="button" data-candle="0" aria-label="Light candle one"><span class="flame"></span><i></i></button>
+              <button class="candle" type="button" data-candle="1" aria-label="Light candle two"><span class="flame"></span><i></i></button>
+              <button class="candle" type="button" data-candle="2" aria-label="Light candle three"><span class="flame"></span><i></i></button>
+              <button class="candle" type="button" data-candle="3" aria-label="Light candle four"><span class="flame"></span><i></i></button>
+              <button class="candle" type="button" data-candle="4" aria-label="Light candle five"><span class="flame"></span><i></i></button>
+            </div>
+            <div class="cake-body cake-body-top"><span class="icing-drip"></span><span class="cake-decoration">♡　✦　♡</span></div>
+            <div class="cake-body cake-body-bottom"><span class="cake-ribbon"></span><span class="cake-berries">●　●　●</span></div>
+            <div class="cake-plate"></div>
+          </div>
+          <p class="candle-instruction" id="candleInstruction">Tap each candle to light it up.</p>
+          <button class="pill-button primary-button blow-button" id="blowCandles" type="button" hidden>Blow the candles <span>✧</span></button>
+        </div>
+        <article class="birthday-letter" id="birthdayLetter" hidden>
+          <span class="letter-flower">✿</span>
+          <p class="letter-eyebrow">A LITTLE NOTE FOR YOU</p>
+          <h3>To the Beauty Queen</h3>
+          <p class="letter-body" id="birthdayLetterText"></p>
+          <span class="letter-signoff" id="birthdaySignoff">With lots of warmth ♡</span>
+        </article>
+        <div class="counter-intro" id="counterIntro" hidden>
+          <p>And now, a little look at all the time we've shared…</p>
+          <button class="pill-button outline-button" id="showCounter" type="button">Click to view the time we've spent together <span>♡</span></button>
+        </div>
+        <div class="time-counter" id="timeCounter" hidden>
+          <div class="counter-heading">Every moment counts</div>
+          <div class="counter-grid">
+            <div><strong id="countDays">0</strong><span>days</span></div>
+            <div><strong id="countHours">00</strong><span>hours</span></div>
+            <div><strong id="countMinutes">00</strong><span>minutes</span></div>
+            <div><strong id="countSeconds">00</strong><span>seconds</span></div>
+          </div>
+          <p class="counter-caption">and counting…</p>
+          <button class="pill-button primary-button" id="toEdits" type="button">Let's see your little edits <span>→</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 / Her edits: four client video placeholders -->
+    <section class="screen edits-screen" id="editsScreen" aria-labelledby="editsTitle" hidden>
+      <div class="edits-glow edits-glow-one"></div><div class="edits-glow edits-glow-two"></div>
+      <div class="edits-content">
+        <span class="section-kicker">A LITTLE COLLECTION OF YOU</span>
+        <h2 class="screen-title" id="editsTitle">Your little but, beautiful edits</h2>
+        <p class="screen-intro">Four favourite edits, saved here because every version of you deserves a replay. ♡</p>
+        <div class="edits-heading-row"><span>THE EDITS</span><span>01 — 04</span></div>
+        <div class="edits-grid" id="editsGrid" aria-label="Four video edit placeholders"></div>
+        <p class="edits-footnote"> I just love you so much to bring this gallery to life.</p>
+        <button class="pill-button primary-button edits-next" id="toFavouriteSong" type="button">Now, let's play our favourite song <span>♫</span></button>
+      </div>
+    </section>
+
+    <!-- 07 / Favourite song -->
+    <section class="screen favourite-song-screen" id="favouriteSongScreen" aria-labelledby="favouriteSongTitle" hidden>
+      <div class="song-glow song-glow-one"></div><div class="song-glow song-glow-two"></div>
+      <div class="song-content">
+        <span class="section-kicker">A SONG THAT FEELS LIKE US</span>
+        <h2 class="screen-title" id="favouriteSongTitle">Our favourite song</h2>
+        <p class="screen-intro" id="favouriteSongNote">Some songs become little time capsules. This one's ours. ♡</p>
+        <div class="song-player-card">
+          <div class="song-artwork" aria-hidden="true">
+            <div class="song-artwork-orbit orbit-one"></div><div class="song-artwork-orbit orbit-two"></div>
+            <div class="song-vinyl"><span class="vinyl-label">♡</span></div>
+            <span class="song-artwork-star star-one">✦</span><span class="song-artwork-star star-two">✧</span>
+            <span class="song-artwork-caption">SIDE A · US</span>
+          </div>
+          <div class="song-player-details">
+            <p class="song-overline">A LITTLE SONG FOR YOU</p>
+            <h3 class="song-track-title" id="songTrackTitle">Our favourite song</h3>
+            <p class="song-artist" id="songArtist">Add the artist's name</p>
+            <div class="song-waveform" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="song-timeline">
+              <span id="songCurrentTime">0:00</span>
+              <input id="songProgress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Song progress" disabled>
+              <span id="songDuration">0:00</span>
+            </div>
+            <div class="song-controls-row">
+              <button class="song-play-button" id="songPlayButton" type="button" aria-label="Play favourite song" disabled><span id="songPlayIcon">▶</span></button>
+              <span class="song-status" id="songStatus" aria-live="polite">Add favourite-song.mp3 to assets/audio</span>
+              <span class="song-equalizer" id="songEqualizer" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            </div>
+          </div>
+        </div>
+        <audio id="favouriteSongAudio" preload="metadata"></audio>
+        <p class="song-note-bottom">A little soundtrack for a lot of feelings. ♡</p>
+        <button class="pill-button primary-button song-next" id="toVault" type="button">Let's go to our secret vault <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- 08 / Vault -->
+    <section class="screen vault-screen" id="vaultScreen" aria-labelledby="vaultTitle" hidden>
+      <div class="vault-stars" aria-hidden="true">✧　　·　✦　　　·　　✧　·　✦</div>
+      <div class="vault-content">
+        <span class="section-kicker">A SECRET JUST FOR YOU</span>
+        <h2 class="screen-title" id="vaultTitle">Write the correct answer to see the secret letter I've prepared for you Pyari bacchi</h2>
+        <p class="screen-intro">There's something special behind this little vault.</p>
+        <div class="vault-illustration" id="vaultIllustration" aria-label="A three-dimensional golden vault with a hinged door">
+          <div class="vault-shadow"></div>
+          <div class="vault-case">
+            <div class="vault-interior">
+              <div class="vault-interior-back">
+                <div class="vault-interior-light"></div>
+                <div class="vault-inner-rings"><i></i><i></i><i></i></div>
+                <div class="vault-inner-shelf"></div>
+                <div class="vault-keepsake"><span>♡</span><b>A LETTER FOR YOU</b><small>sealed with love</small></div>
+              </div>
+            </div>
+            <div class="vault-hinge hinge-top"></div><div class="vault-hinge hinge-bottom"></div>
+            <div class="vault-door">
+              <div class="vault-door-back"><span class="door-back-wheel"></span><i></i><i></i><i></i></div>
+              <div class="vault-door-face">
+                <div class="vault-bolts"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="vault-rim"><div class="vault-dial"><span class="dial-mark"></span><span class="dial-center"></span><i class="dial-tick tick-a"></i><i class="dial-tick tick-b"></i><i class="dial-tick tick-c"></i><i class="dial-tick tick-d"></i></div></div>
+                <div class="vault-handle"><span></span></div><div class="vault-keyhole">♡</div>
+                <span class="vault-door-label">PRIVATE • 01</span>
+              </div>
+            </div>
+          </div>
+          <div class="vault-glow"></div>
+        </div>
+        <form class="vault-form" id="vaultForm">
+          <label for="vaultAnswer" id="vaultQuestion">What is the secret answer?</label>
+          <input id="vaultAnswer" type="text" autocomplete="off" placeholder="Type your answer here…" required>
+          <p class="vault-feedback" id="vaultFeedback" aria-live="polite">Type your answer, then press Enter or tap the button.</p>
+          <button class="pill-button primary-button vault-unlock" id="vaultUnlock" type="submit">Enter answer <span>↵</span></button>
+        </form>
+      </div>
+    </section>
+
+    <!-- 09 / Secret letter -->
+    <section class="screen final-letter-screen" id="finalLetterScreen" aria-labelledby="finalLetterTitle" hidden>
+      <div class="letter-paper-wrap">
+        <div class="letter-paper">
+          <span class="letter-flower">✿</span><span class="section-kicker">JUST BETWEEN US</span>
+          <h2 id="finalLetterTitle">One last little letter</h2>
+          <p class="final-letter-body" id="finalLetterBody"></p>
+          <p class="final-letter-signoff" id="finalLetterSignoff">Always cheering for you ♡</p>
+          <div class="letter-stamp">✦</div>
+        </div>
+        <button class="pill-button primary-button letter-game-button" id="toGame" type="button">Let's move onto the game <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- 10 / Heart catcher -->
+    <section class="screen game-screen" id="gameScreen" aria-labelledby="gameTitle" hidden>
+      <div class="game-glow game-glow-a"></div><div class="game-glow game-glow-b"></div>
+      <div class="game-content">
+        <span class="section-kicker">A TINY BIRTHDAY CHALLENGE</span>
+        <h2 class="screen-title" id="gameTitle">Catch the hearts!</h2>
+        <p class="screen-intro">Catch as many floating hearts as you can in 30 seconds.</p>
+        <div class="game-stats"><div><span>TIME</span><strong id="gameTimer">30</strong></div><div><span>YOUR SCORE</span><strong id="gameScore">0</strong></div><div><span>BEST SCORE</span><strong id="highScore">0</strong></div></div>
+        <div class="game-board" id="gameBoard" aria-label="Heart-catching game area">
+          <div class="game-board-hint" id="gameBoardHint"><span>♡</span><b>Ready, set, catch!</b><small>Tap the hearts as they pop up.</small></div>
+          <div class="game-heart-layer" id="gameHeartLayer"></div>
+          <div class="game-end-overlay" id="gameEndOverlay" hidden><span class="end-sparkle">✦</span><h3>Lovely catching!</h3><p>You caught <b id="finalScore">0</b> hearts.</p><button class="pill-button primary-button" id="playAgain" type="button">Play again <span>↻</span></button></div>
+        </div>
+        <button class="pill-button primary-button game-start-button" id="startGame" type="button">Start the game <span>♡</span></button>
+        <p class="game-footer" id="gameFooter">A little game to end your birthday surprise on a happy note.</p>
+        <button class="pill-button exit-website-button" id="exitWebsite" type="button" hidden>Exit the website <span>↗</span></button>
+      </div>
+    </section>
+
+    <!-- 11 / A gentle end screen. Browsers generally prevent pages from closing tabs they did not open. -->
+    <section class="screen exit-screen" id="exitScreen" aria-labelledby="exitTitle" hidden>
+      <div class="exit-glow"></div>
+      <div class="exit-content">
+        <span class="exit-star">✦</span>
+        <p class="section-kicker">END OF YOUR LITTLE SURPRISE</p>
+        <h2 class="screen-title" id="exitTitle">That's a wrap,<br><em>Shreya.</em></h2>
+        <p class="screen-intro">Thank you for spending these little moments here. Keep these little moments close, and have the loveliest year ahead. ♡</p>
+        <button class="pill-button primary-button close-experience-button" id="closeExperience" type="button">Close this tab <span>♡</span></button>
+        <p class="exit-fallback" id="exitFallback" hidden>You can now close this browser tab. Thank you for being here. ♡</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
